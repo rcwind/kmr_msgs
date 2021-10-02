@@ -1,12 +1,21 @@
 # Kmr Sensor Data Messages
 #
-# For more direct simple interactions (buttons, leds, gyro, motor velocity
+# For more direct simple interactions (leds, gyro, motor velocity
 # etc) use the other topics. This provides detailed information about the
 # entire state package that is transmitted at 50Hz from the robot.
 #
 
 
 ###### CONSTANTS ######
+# vehicle type
+uint8 VEHICLE_DIFF2  = 1
+uint8 VEHICLE_DIFF4  = 2
+uint8 VEHICLE_ACKERMAN1  = 3
+uint8 VEHICLE_ACKERMAN2  = 4
+uint8 VEHICLE_MECANUM  = 5
+uint8 VEHICLE_DUALSTEE  = 6
+uint8 VEHICLE_QUADSTEE  = 7
+
 # Bumper states (states are combined, when multiple bumpers are pressed)
 uint8 BUMPER_RIGHT  = 1
 uint8 BUMPER_CENTRE = 2
@@ -20,11 +29,6 @@ uint8 WHEEL_DROP_LEFT  = 2
 uint8 CLIFF_RIGHT  = 1
 uint8 CLIFF_CENTRE = 2
 uint8 CLIFF_LEFT   = 4
-
-# Button states (only one button can be triggered at a time)
-uint8 BUTTON0 = 1
-uint8 BUTTON1 = 2
-uint8 BUTTON2 = 4
 
 # Charger state is a combination of charging device (adapter, docking station)
 # and state (charging, charged, discharging):
@@ -56,14 +60,16 @@ Header header
 # Core Packet
 ###################
 uint16 time_stamp      # milliseconds starting when turning on Kmr (max. 65536, then starts from 0 again)
+uint8  vehicle          # see vehicle type 
 uint8  bumper          # see bumper states
 uint8  wheel_drop      # see wheel drop sensor states
 uint8  cliff           # see cliff sensor states
-uint16 left_encoder    # accumulated ticks left wheel starting with turning on Kmr (max. 65535)
-uint16 right_encoder   # accumulated ticks right wheel starting with turning on Kmr (max. 65535)
-uint8  buttons         # see button states
-uint8  charger         # see charger states
-int16  charger_current         # charger current, mA
+uint16 left_front_encoder    # accumulated ticks left wheel starting with turning on Kmr (max. 65535)
+uint16 right_front_encoder   # accumulated ticks right wheel starting with turning on Kmr (max. 65535)
+uint16 left_rear_encoder    # accumulated ticks left wheel starting with turning on Kmr (max. 65535)
+uint16 right_rear_encoder   # accumulated ticks right wheel starting with turning on Kmr (max. 65535)
+uint8  charger_status         # see charger_status states
+int16  charger_current         # charger_status current, mA
 uint16  battery         # battery voltage in 0.1V (ex. 16.1V -> 161)
 
 ###################
