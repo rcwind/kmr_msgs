@@ -1,12 +1,12 @@
-# Sends a command for controlling the a LED.
-# 
-# Typically the first LED is always reserved to denote
-# the state - the remainder will be controllable. 
+# Sends a command for controlling the WS2812 LED.
 
-uint8 BLACK   = 0
-uint8 GREEN   = 1
-uint8 ORANGE  = 2
-uint8 RED     = 3
-
-# For kmr there are only two controllable LED's.
-uint8 value
+# start index
+uint16 index
+# the number of led to set
+uint16 count
+# red color
+uint8 red
+# green color
+uint8 green
+# blue color
+uint8 blue
